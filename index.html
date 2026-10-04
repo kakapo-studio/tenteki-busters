@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>熱闘天敵バスターズ</title>
+  <meta name="description" content="カカポの里に攻めてきた天敵たちを、ホームランで追い返すバッティングゲーム。マウス・キーボード・スマホのタップで遊べます。">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <!-- OGP（SNSでURLを共有したときの表示） -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="熱闘天敵バスターズ">
+  <meta property="og:description" content="カカポの里に攻めてきた天敵たちを、ホームランで追い返せ！ 消える球、分身する球…むずかしいバッティングゲーム。">
+  <meta property="og:url" content="https://kakapo-studio.com/games/tenteki-busters/">
+  <meta property="og:image" content="https://kakapo-studio.com/games/tenteki-busters/images/ogp.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="app-header">
+    <a class="brand" href="https://kakapo-studio.com/">kakapo studio</a>
+  </header>
+
+  <main class="app">
+
+    <!-- ステージや本数の表示 -->
+    <div class="hud">
+      <div class="hud-item"><span>STAGE</span><strong id="stageLabel">1</strong></div>
+      <div class="hud-item"><span>のこり球</span><strong id="ballsLeft">10</strong></div>
+      <div class="hud-item"><span>ホームラン</span><strong id="hrLabel">0 / 3</strong></div>
+      <div class="hud-item"><span>最長</span><strong id="bestLabel">-</strong></div>
+    </div>
+
+    <!-- ゲーム画面：canvas の上に、案内用の画面（overlay）を重ねる -->
+    <div class="board">
+      <canvas id="game" width="480" height="640" aria-label="熱闘天敵バスターズのゲーム画面"></canvas>
+
+      <div class="overlay" id="overlay">
+        <canvas class="overlay-kakapo" id="overlayKakapo" width="32" height="33" aria-hidden="true"></canvas>
+        <h1 class="overlay-title" id="overlayTitle">熱闘<br>天敵バスターズ</h1>
+        <p class="overlay-text" id="overlayText"></p>
+
+        <!-- ステージを選ぶボタン（script.js で並べる） -->
+        <div class="stage-list" id="stageList" hidden></div>
+
+        <button type="button" class="button" id="overlayButton" hidden></button>
+        <button type="button" class="sub-button" id="subButton" hidden></button>
+
+        <!-- SNS でシェア（ざんねん・全クリアのときだけ表示） -->
+        <div class="share" id="share" hidden>
+          <p class="share-title">結果をシェアする</p>
+          <div class="share-buttons">
+            <a class="share-button" id="shareX" href="#" target="_blank" rel="noopener">X でポスト</a>
+            <a class="share-button" id="shareLine" href="#" target="_blank" rel="noopener">LINE で送る</a>
+            <button type="button" class="share-button" id="copyResult">結果をコピー</button>
+          </div>
+          <p class="copy-message" id="copyMessage" aria-live="polite"></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button type="button" id="muteButton">音：ON</button>
+      <button type="button" id="quitButton" class="quit">やめる</button>
+    </div>
+
+    <div class="help">
+      <p>
+        振る：クリック・<kbd>Space</kbd>・画面をタップ
+      </p>
+      <p class="tip">球が点線の四角にとどく瞬間に振るほど、遠くへ飛びます。100m でホームラン！</p>
+    </div>
+  </main>
+
+  <script src="stages.js"></script>
+  <script src="pixel.js"></script>
+  <script src="sound.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
